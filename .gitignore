@@ -1,0 +1,14 @@
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# FiveM/runtime artifacts
+cache/
+logs/
+*.log
+
+# Archives
+*.zip
+*.rar
+*.7z
