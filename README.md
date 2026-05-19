@@ -26,14 +26,15 @@ Turn worn GTA V clothing into inventory items for FiveM servers. Players can rem
 
 1. Place `peak-clothingitems` in your server `resources` folder.
 2. Add the inventory item definitions from `install/` to your inventory.
-3. Add this to `server.cfg` after your framework, inventory, and appearance resources:
+3. Copy the transparent item icons from `images/` into your inventory image folder.
+4. Add this to `server.cfg` after your framework, inventory, and appearance resources:
 
 ```cfg
 ensure peak-clothingitems
 ```
 
-4. Leave `shared/config.lua` on `auto` or set your exact systems.
-5. Restart the server and test `/clothing list`, `/clothing remove hat`, and using the generated clothing item.
+5. Leave `shared/config.lua` on `auto` or set your exact systems.
+6. Restart the server and test `/clothing list`, `/clothing remove hat`, and using the generated clothing item.
 
 For a full setup guide, see [INSTALLATION.md](INSTALLATION.md).
 
@@ -64,6 +65,10 @@ hat, glasses, earring, watch, bracelet
 - [Changelog](CHANGELOG.md)
 
 `PROMPT.md` is included for AI-assisted installation in customer servers.
+
+## Included Item Images
+
+The `images/` folder contains one 256x256 transparent PNG for each clothing item. Copy these files into your inventory image directory, such as `qb-inventory/html/images/`, `ps-inventory/html/images/`, or the equivalent folder for your inventory resource.
 
 ## Security Notes
 

@@ -32,6 +32,8 @@ Copy the entries from `install/ox_inventory_items.lua` into:
 ox_inventory/data/items.lua
 ```
 
+Copy the included icons from `images/` into the image path used by your `ox_inventory` build or theme.
+
 ### QBCore / qb-inventory / ps-inventory
 
 Copy the entries from `install/qb_shared_items.lua` into:
@@ -40,9 +42,18 @@ Copy the entries from `install/qb_shared_items.lua` into:
 qb-core/shared/items.lua
 ```
 
+Then copy the included icons from `images/` into your inventory image folder, for example:
+
+```text
+qb-inventory/html/images/
+ps-inventory/html/images/
+```
+
 ### ESX
 
 Run the SQL from `install/esx_items.sql` against your database.
+
+If your ESX inventory UI uses item icons, copy the included PNGs from `images/` into that inventory's image folder.
 
 ## 3. Configure The Resource
 

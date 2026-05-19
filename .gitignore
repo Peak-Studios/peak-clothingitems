@@ -6,6 +6,7 @@ Thumbs.db
 # FiveM/runtime artifacts
 cache/
 logs/
+tmp/
 *.log
 
 # Archives
