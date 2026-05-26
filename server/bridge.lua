@@ -191,13 +191,18 @@ function Peak.Server.RegisterUsableItem(item, cb)
     Peak.Server.UsableItems[item] = cb
     local fw = Peak.Server.FrameworkName
     local obj = Peak.Server.FrameworkObject
+    local inv = Peak.Server.GetInventorySystem()
 
     local onUse = function(source, itemData)
         local callback = Peak.Server.UsableItems[item]
         if callback then callback(source, item, itemData) end
     end
 
-    if fw == 'qbox' then
+    if inv == 'ox_inventory' then
+        -- ox_inventory uses item definition exports instead of runtime usable registration.
+        -- See install/ox_inventory_items.lua for the required server.export entry.
+        return
+    elseif fw == 'qbox' then
         pcall(function() exports.qbx_core:CreateUseableItem(item, function(src, itm) onUse(src, itm) end) end)
         return
     elseif fw == 'qbcore' then
@@ -240,3 +245,29 @@ exports('IsReady', function() return Peak.Server.Ready end)
 exports('AddItem', function(...) return Peak.Server.AddItem(...) end)
 exports('RemoveItem', function(...) return Peak.Server.RemoveItem(...) end)
 exports('HasItem', function(...) return Peak.Server.HasItem(...) end)
+exports('useClothingItem', function(event, item, inventory, slot)
+    if event ~= 'usingItem' then return end
+    if type(inventory) ~= 'table' or not inventory.id then return false end
+
+    local itemData = nil
+    if Peak.Server.GetInventorySystem() == 'ox_inventory' then
+        local ok, slotData = pcall(function()
+            return exports.ox_inventory:GetSlot(inventory.id, slot)
+        end)
+        if ok then itemData = slotData end
+    end
+
+    local itemName = type(item) == 'table' and item.name or item
+    if type(itemName) ~= 'string' and itemData then
+        itemName = itemData.name
+    end
+    if type(itemName) ~= 'string' then return false end
+
+    if not itemData then
+        itemData = { name = itemName, slot = slot }
+    end
+
+    if not Peak.Server.HandleClothingItemUse then return false end
+    local handled = Peak.Server.HandleClothingItemUse(inventory.id, itemName, itemData, true)
+    if not handled then return false end
+end)

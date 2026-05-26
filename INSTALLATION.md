@@ -32,6 +32,9 @@ Copy the entries from `install/ox_inventory_items.lua` into:
 ox_inventory/data/items.lua
 ```
 
+The ox entries must include `server = { export = 'peak-clothingitems.useClothingItem' }`.
+Without that export, ox_inventory will show the items but will not call this resource when a player uses them.
+
 Copy the included icons from `images/` into the image path used by your `ox_inventory` build or theme.
 
 ### QBCore / qb-inventory / ps-inventory

@@ -10,6 +10,7 @@
 ## Item Can Be Removed But Not Worn
 
 - Check that the item metadata exists in the inventory item.
+- For `ox_inventory`, confirm every clothing item definition has `server = { export = 'peak-clothingitems.useClothingItem' }`.
 - Make sure the player model matches the metadata model. Male and female freemode clothing is not interchangeable.
 - Remove clothing already occupying the target slot before using the item.
 
